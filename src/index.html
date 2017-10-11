@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/d3.slider.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div style="display: flex">
+            <div class="pricing-graph" style="height: auto; width: 65%">
+                <span class="g-section-title">Pricing Graph</span>
+                <div class=" g-parameter">
+                    <div class="g-axis-label">EQUIVALENT<br>PRICE</div>
+                    <Label class="d3Chart" id="mChart" data-parameter="cm" data-value="30" data-type="bigDollars" data-xAxisLabel="Units" data-xAxisFormat=".2f" data-yAxisLabel="y" data-yAxisFormat="$.2f" data-restrict="Math.max(3e4, Math.min(3e6, d3.round(v < 1000 ? v * 1000 : v, -3)))"
+                           data-scale="d3.scale.log().domain([3e4, 3e6])" data-scale-format="$s" data-height="240" style=" height: 240px;">
+                    </Label>
+                </div>
+            </div>
+            <div id = "pricing-description">
+                <div id="pricing-param-size" class="d3slider" style="width: 460px; height: 80px" >
+
+                </div>
+
+                <div id="pricing-param-order" class="d3slider" style="width: 460px; height: 80px">
+
+                </div>
+
+                <div id="pricing-final-info">
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="js/vendor/d3.old.js"></script>
+        <script src="js/vendor/d3.slider.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    </body>
+</html>

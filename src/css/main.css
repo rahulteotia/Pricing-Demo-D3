@@ -1,0 +1,146 @@
+.chartTitle{
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    top: 100px;
+}
+.bar {
+    fill: #B3E5FC;
+&:hover {
+     fill: brown;
+ }
+}
+
+.barSelected{
+    fill: #2196F3;
+}
+
+.axisLabel{
+    position: absolute;
+    color: #aaa;
+    font-size: .75rem;
+    font-weight: 500;
+    font-family: nyt-franklin;
+
+}
+
+.ticks {
+    font: 10px sans-serif;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+    stroke-linecap: round;
+}
+.track {
+    stroke: #000;
+    stroke-opacity: 0.3;
+    stroke-width: 8px
+}
+
+.track-inset {
+    stroke: #ddd;
+    stroke-width: 8px - 2;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    cursor: ew-resize;
+}
+
+.handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+    cursor: ew-resize;
+    user-select: none;
+    pointer-events: none;
+}
+
+.line {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.grid {
+line {
+    stroke: white;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+path {
+    stroke-width: 0;
+}
+}
+.g-parameter-input{
+    position: relative;
+    left: -230px;
+    display: inline;
+    min-width: 160px;
+input{
+    padding: 4px 0;
+    width: 40px;
+    margin: auto;
+
+}
+}
+
+
+
+.tick line{
+    stroke: #fff;
+}
+
+.g-parameter-chart{
+    position: absolute;
+}
+
+.g-parameter{
+    display: block;
+    position: relative;
+}
+
+.g-parameter-chart svg {
+    overflow: hidden;
+}
+
+.g-parameter-tip {
+    z-index: 1;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    text-anchor: middle;
+}
+
+.g-parameter-tip path {
+    fill: #F16195;
+}
+
+.domain {
+    display: none;
+}
+
+.g-section-title{
+    color: #333;
+    font-family: "nyt-franklin";
+    font-weight: 500;
+    font-size: 24px;
+    display: block;
+}
+
+.g-axis-label{
+    position: absolute;
+    right: -300px;
+    width: 80px;
+    color: #aaa;
+    font-size: .75rem;
+    font-weight: 500;
+    font-family: nyt-franklin;
+}
+
+.pricing-graph{
+}
