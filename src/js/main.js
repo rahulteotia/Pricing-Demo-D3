@@ -1,16 +1,12 @@
 $(document).ready(function () {
-    function getData() {
-        var a = 0.04;
-        var data = [];
-        var data2 = [
-            /////////////////////////////////////////////
+    function getPricingData() {
+        var data = [
             {
                 xVar: 1,
                 yVar: 2984,
                 existingPrice: 1440
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 2,
                 yVar: 1571,
@@ -21,7 +17,6 @@ $(document).ready(function () {
                 yVar: 1100,
                 existingPrice: 585
             },
-            /////////////////////////////////////////////
             {
                 xVar: 4,
                 yVar: 864,
@@ -34,7 +29,6 @@ $(document).ready(function () {
                 existingPrice: 415
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 6,
                 yVar: 629,
@@ -47,7 +41,6 @@ $(document).ready(function () {
                 existingPrice: 341
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 10,
                 yVar: 441,
@@ -66,7 +59,6 @@ $(document).ready(function () {
                 existingPrice: 209
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 50,
                 yVar: 224,
@@ -85,7 +77,6 @@ $(document).ready(function () {
                 existingPrice: 479
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 100,
                 yVar: 197,
@@ -104,7 +95,6 @@ $(document).ready(function () {
                 existingPrice: 170
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 400,
                 yVar: 175,
@@ -124,7 +114,6 @@ $(document).ready(function () {
                 existingPrice: 166
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 900,
                 yVar: 171,
@@ -137,7 +126,6 @@ $(document).ready(function () {
                 existingPrice: 165
 
             },
-            /////////////////////////////////////////////
             {
                 xVar: 2000,
                 yVar: 169,
@@ -188,18 +176,7 @@ $(document).ready(function () {
             }
         ];
 
-
-        var xAxis = [1, 5, 10, 20, 40, 80, 100, 200, 400, 800, 1000, 1500, 2000, 3500, 5000, 7250, 9500, 10750, 15000, 20250, 25500, 35000, 50000, 65000, 70000, 105000, 125000, 500000, 1000000];
-        var b = 50;
-        var xVar = xAxis.length;
-        for (var i = 0; i < xVar; i++) {
-            b = b - 1
-            data.push({
-                xVar: xAxis[i],
-                yVar: b / a
-            });
-        }
-        return data2;
+        return data;
     }
 
     function drawChart(selector, data) {
@@ -278,6 +255,7 @@ $(document).ready(function () {
 
         var middle = data[Math.round((data.length + 1) / 2)];
 
+        //DRAW BARS
         var bars = g.selectAll(".bar")
             .data(data)
             .enter().append("rect")
@@ -327,8 +305,9 @@ $(document).ready(function () {
             gY.call(yAxis);
             //TODO: add y-value tooltip
 
-            //Bars
             yAxisScale.domain([0, dragEvent.x * 5]);
+
+            //REMOVE ALL BARS
             var bars = d3.selectAll(".bar")
                 .remove()
                 .exit()
@@ -344,6 +323,7 @@ $(document).ready(function () {
             //     .data(data);
 
 
+            //REDRAW NEW BARS ON DRAG
             var newBars = g.selectAll(".bar")
                 .data(data)
                 .enter().append("rect")
@@ -386,6 +366,8 @@ $(document).ready(function () {
             toolTip.attr("style", "margin-left: 0px; margin-bottom: 0px; left: " + barX + "px; bottom: " + -(barsel) + "px;");
 
         };
+
+        //SLIDER
         var slider = svg.append("g")
             .attr("class", "slider")
             .attr("transform", "translate(" + margin.left + "," + sliderTop + ")");
@@ -406,6 +388,8 @@ $(document).ready(function () {
                 slider.interrupt();
             }).on("start drag", dragging)); //https://github.com/d3/d3-drag
 
+
+        //HANDLE FOR SLIDER
         var handle = slider.append("g").attr("class", "g-parameter-value handle");
         var selectedBar = d3.selectAll(".barSelected");
         var initialXPos = selectedBar.attr("x");
@@ -416,8 +400,9 @@ $(document).ready(function () {
             .attr("transform", "translate(" + initialXPos + "," + -6 + ")");
         handle.append("text").style("text-anchor", "middle").attr("y", 20).attr("dy", ".71em");
 
-        var toolTip = chartEl.append("svg");
+        //TOOLTIP ON BARS
 
+        var toolTip = chartEl.append("svg");
         toolTip.attr("class", "g-parameter-tip");
         toolTip.attr("width", "120");
         toolTip.attr("height", "25");
@@ -432,44 +417,13 @@ $(document).ready(function () {
         text.text("$ " + Math.round(middle.yVar));
         updateSizingPrice(middle);
         var barX = g.selectAll(".barSelected").attr("x");
-
         toolTip.attr("style", "margin-left: 20px; margin-bottom: 39px; left: " + barX + "px; bottom: " + (-barsel) + "px;");
     }
 
 
     function drawEverything() {
         $(".d3Chart").empty();
-        var data = getData();
-//         var tickFormatter = function (d) {
-//             unhighLightSizingDiv();
-//             if (d == 0) {
-//                 $("#row-1-header-1").css({"background": "#F16195"});
-//                 $("#row-2-header-1").css({"background": "#F16195"});
-//                 return 'Small';
-//             } else if (d == 1) {
-//                 $("#row-1-header-2").css({"background": "#F16195"});
-//                 $("#row-2-header-2").css({"background": "#F16195"});
-//                 return 'Medium';
-//             } else if (d == 2) {
-//                 $("#row-1-header-3").css({"background": "#F16195"});
-//                 $("#row-2-header-3").css({"background": "#F16195"});
-//                 return 'Large';
-//             }
-//         }
-//         console.log(data);
-//         var sliderParamSize = d3old.slider().min(0).max(2).ticks(2).showRange(true).value(1).stepValues([0, 1, 2]).tickFormat(tickFormatter);
-// // Render the slider in the div
-//         d3old.select('#pricing-param-size').call(sliderParamSize);
-
-//
-//         var tickFormatterOrder = function (d) {
-//             return " Order no. " + d;
-//         }
-//
-//         var sliderParamOrder = d3old.slider().min(1).max(6).ticks(5).showRange(true).value(2).stepValues([1, 2, 3, 4, 5, 6]).tickFormat(tickFormatterOrder);
-// // Render the slider in the div
-//         d3old.select('#pricing-param-order').call(sliderParamOrder);
-//
+        var data = getPricingData();
         drawChart(".d3Chart", data);
     }
 
@@ -498,8 +452,6 @@ $(document).ready(function () {
         // $("#row-2-header-3").text(currency+" "+amount * large * following);
     }
 
-
     drawEverything();
-
 
 });
