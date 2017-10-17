@@ -23,10 +23,10 @@
         <!-- Add your site or application content here -->
         <div style="display: flex">
             <div class="pricing-graph" style="height: auto; width: 65%">
-                <span class="g-section-title">Pricing Graph</span>
+                <span class="g-section-title">Volume Pricing Model for a Motion Capture Glove</span>
                 <div class=" g-parameter">
                     <div class="g-axis-label">EQUIVALENT<br>PRICE</div>
-                    <Label class="d3Chart" id="mChart" data-parameter="cm" data-value="30" data-type="bigDollars" data-xAxisLabel="Units" data-xAxisFormat=".2f" data-yAxisLabel="y" data-yAxisFormat="$.2f" data-restrict="Math.max(3e4, Math.min(3e6, d3.round(v < 1000 ? v * 1000 : v, -3)))"
+                    <Label class="d3Chart" id="mChart" data-parameter="cm" data-value="850" data-type="bigDollars" data-xAxisLabel="No of Units" data-xAxisFormat=".0s" data-yAxisLabel="" data-yAxisFormat="$.2f" data-restrict="Math.max(3e4, Math.min(3e6, d3.round(v < 1000 ? v * 1000 : v, -3)))"
                            data-scale="d3.scale.log().domain([3e4, 3e6])" data-scale-format="$s" data-height="240" style=" height: 240px;">
                     </Label>
                 </div>
@@ -41,7 +41,42 @@
                 </div>
 
                 <div id="pricing-final-info">
+                    <div class="Table">
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>First Order</strong></div>
+                            <div class="Table-row-item" data-header="Header2" id="row-1-header-1">$ 100</div>
+                        </div>
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>Following Orders</strong></div>
+                            <div class="Table-row-item" data-header="Header2" id="row-2-header-1">$ 200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="product-information">
+                <div id="product-photo" >
+                   <img src="img/glove.png" style="width: 320px; height: auto"/>
+                </div>
 
+                <div id="product-description" class="d3slider" style="width: 320px; height: 80px">
+                    <div class="Table">
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>Number of Sensors</strong></div>
+                            <div class="Table-row-item" data-header="Header2">10</div>
+                        </div>
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>Motherboard</strong></div>
+                            <div class="Table-row-item" data-header="Header2">Custom 10 channel</div>
+                        </div>
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>Sensor Dimension</strong></div>
+                            <div class="Table-row-item" data-header="Header2">200x200mm</div>
+                        </div>
+                        <div class="Table-row">
+                            <div class="Table-row-item" data-header="Header1"><strong>Fabric</strong></div>
+                            <div class="Table-row-item" data-header="Header2">White Spandex</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

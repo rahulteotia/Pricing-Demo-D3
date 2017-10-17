@@ -2,115 +2,204 @@ $(document).ready(function () {
     function getData() {
         var a = 0.04;
         var data = [];
-        var data2  = [
-            /////////////////////////////////////////////
-            {
-                xVar: 0,
-                yVar: 0
-
-            },
+        var data2 = [
             /////////////////////////////////////////////
             {
                 xVar: 1,
-                yVar: 3248
+                yVar: 2984,
+                existingPrice: 1440
+
             },
+            /////////////////////////////////////////////
             {
                 xVar: 2,
-                yVar: 3599
+                yVar: 1571,
+                existingPrice: 799
+            },
+            {
+                xVar: 3,
+                yVar: 1100,
+                existingPrice: 585
             },
             /////////////////////////////////////////////
             {
-                xVar: 9,
-                yVar: 6113
+                xVar: 4,
+                yVar: 864,
+                existingPrice: 479
 
             },
+            {
+                xVar: 5,
+                yVar: 723,
+                existingPrice: 415
+
+            },
+            /////////////////////////////////////////////
+            {
+                xVar: 6,
+                yVar: 629,
+                existingPrice: 372
+
+            },
+            {
+                xVar: 7,
+                yVar: 562,
+                existingPrice: 341
+
+            },
+            /////////////////////////////////////////////
             {
                 xVar: 10,
-                yVar: 6475
+                yVar: 441,
+                existingPrice: 286
+
+            },
+            {
+                xVar: 20,
+                yVar: 299,
+                existingPrice: 220
+
+            },
+            {
+                xVar: 30,
+                yVar: 260,
+                existingPrice: 209
 
             },
             /////////////////////////////////////////////
-            {
-                xVar: 49,
-                yVar: 21249
-
-            },
             {
                 xVar: 50,
-                yVar: 21614
+                yVar: 224,
+                existingPrice: 193
+
+            },
+            {
+                xVar: 60,
+                yVar: 214,
+                existingPrice: 189
+
+            },
+            {
+                xVar: 70,
+                yVar: 210,
+                existingPrice: 479
 
             },
             /////////////////////////////////////////////
-            {
-                xVar: 99,
-                yVar: 41231
-
-            },
             {
                 xVar: 100,
-                yVar: 41595
-
-            },
-            /////////////////////////////////////////////
-            {
-                xVar: 199,
-                yVar: 80310
+                yVar: 197,
+                existingPrice: 188
 
             },
             {
                 xVar: 200,
-                yVar: 80674
+                yVar: 180,
+                existingPrice: 172
+
+            },
+            {
+                xVar: 300,
+                yVar: 175,
+                existingPrice: 170
 
             },
             /////////////////////////////////////////////
             {
-                xVar: 499,
-                yVar: 197550
+                xVar: 400,
+                yVar: 175,
+                existingPrice: 168
 
             },
+
             {
                 xVar: 500,
-                yVar: 197914
+                yVar: 172,
+                existingPrice: 167
+
+            },
+            {
+                xVar: 700,
+                yVar: 172,
+                existingPrice: 166
 
             },
             /////////////////////////////////////////////
             {
-                xVar: 999,
-                yVar: 392950
+                xVar: 900,
+                yVar: 171,
+                existingPrice: 166
 
             },
             {
                 xVar: 1000,
-                yVar: 393315
+                yVar: 170,
+                existingPrice: 165
 
             },
             /////////////////////////////////////////////
             {
-                xVar: 4999,
-                yVar: 1955468
+                xVar: 2000,
+                yVar: 169,
+                existingPrice: 165
+
+            },
+            {
+                xVar: 3000,
+                yVar: 169,
+                existingPrice: 164
+
+            },
+            {
+                xVar: 4000,
+                yVar: 169,
+                existingPrice: 164
 
             },
             {
                 xVar: 5000,
-                yVar: 1955833
+                yVar: 169,
+                existingPrice: 164
 
             },
-            /////////////////////////////////////////////
+            {
+                xVar: 6000,
+                yVar: 169,
+                existingPrice: 164
+
+            },
+            {
+                xVar: 7000,
+                yVar: 169,
+                existingPrice: 164
+
+            },
+            {
+                xVar: 9000,
+                yVar: 169,
+                existingPrice: 164
+
+            },
             {
                 xVar: 10000,
-                yVar: 3909153
+                yVar: 169,
+                existingPrice: 165
 
             }
         ];
 
 
-        for (var b = 8; b <= 50; b = b + 1) {
+        var xAxis = [1, 5, 10, 20, 40, 80, 100, 200, 400, 800, 1000, 1500, 2000, 3500, 5000, 7250, 9500, 10750, 15000, 20250, 25500, 35000, 50000, 65000, 70000, 105000, 125000, 500000, 1000000];
+        var b = 50;
+        var xVar = xAxis.length;
+        for (var i = 0; i < xVar; i++) {
+            b = b - 1
             data.push({
-                xVar: b,
+                xVar: xAxis[i],
                 yVar: b / a
             });
         }
-        return data;
+        return data2;
     }
 
     function drawChart(selector, data) {
@@ -126,15 +215,17 @@ $(document).ready(function () {
         chartDiv.attr("class", "g-parameter-chart");
 
         var svg = chartDiv.append("svg");
-        svg.attr('width', 950).attr('height', 650).attr('viewBox', '0 0 950 650');
+        svg.attr('width', 950).attr('height', 650);
         var margin = {
             top: 50,
-            right: 20,
+            right: 40,
             bottom: 40,
             left: 70
         };
+        var graphHeight = svg.attr("height");
+
         var width = +svg.attr("width") - margin.left - margin.right;
-        var yAxisWidth = +svg.attr("width") + 10 - margin.left;
+        var yAxisWidth = +svg.attr("width") - margin.left;
 
         var height = +svg.attr("height") - margin.top - margin.bottom;
         var sliderTop = 0 + height + margin.top;
@@ -163,7 +254,9 @@ $(document).ready(function () {
         var gX = g.append("g") //add x-axis
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(xAxisScale).ticks(data.length, xAxisFormat));
+            .call(d3.axisBottom(xBandScale)
+                .ticks(20)
+                .tickFormat(d3.format(".0s")));
         g.append("text") //add x-axis label
             .attr("class", "axisLabel xAxisLabel")
             .attr("text-anchor", "middle")
@@ -172,7 +265,7 @@ $(document).ready(function () {
         var yAxis = d3.axisLeft(yAxisScale).ticks(yTicks, yAxisFormat);
         var gY = g.append("g") //add y-axis
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(" + yAxisWidth + ", 0)")
+            .attr("transform", "translate(" + 0 + ", 0)")
             .call(yAxis);
         svg.append("text") //add y-axis label
             .attr("class", "axisLabel yAxisLabel")
@@ -196,14 +289,19 @@ $(document).ready(function () {
                 return yAxisScale(d.yVar);
             })
             .attr("width", xBandScale.bandwidth())
-            .attr("height", function (d) {
-                return height - yAxisScale(d.yVar);
-            }).attr("class", function (d) {
+            .attr("class", function (d) {
                 if (middle.xVar == d.xVar) {
                     return "barSelected";
                 } else {
                     return "bar";
                 }
+            }).attr("height", 0)
+            .transition()
+            .duration(600)
+            .delay(function (d, i) {
+                return i * 50;
+            }).attr("height", function (d) {
+                return height - yAxisScale(d.yVar);
             });
 
         function make_y_gridlines() {
@@ -220,19 +318,17 @@ $(document).ready(function () {
             //console.log('dragEvent', dragEvent);
             var h = xAxisScale.invert(dragEvent.x);
             var w = yAxisScale.invert(dragEvent.y);
-            console.log('h', h);
             if (h <= xAxisMin || h > xAxisMax) {
                 return;
             }
             chartEl.attr('data-value', dragEvent.x);
-            text.text("$ " + Math.round(h));
             handlePath.attr("transform", "translate(" + xAxisScale(h) + ",-6)"); //TODO: handle should move when dragged
 
             gY.call(yAxis);
             //TODO: add y-value tooltip
 
             //Bars
-            yAxisScale.domain([0, dragEvent.x * 2]);
+            yAxisScale.domain([0, dragEvent.x * 5]);
             var bars = d3.selectAll(".bar")
                 .remove()
                 .exit()
@@ -267,19 +363,27 @@ $(document).ready(function () {
                     }
                     return height - yAxisScale(d.yVar);
                 }).attr("class", function (d) {
-                    if (Math.round(h) != d.xVar) {
-                        return "bar";
-                    } else {
+                    var xBandStart = xBandScale(d.xVar);
+                    var xBandEnd = xBandStart + 27;
+                    console.log("X "+dragEvent.x);
+
+                    if( dragEvent.x >= xBandStart &&  dragEvent.x <= xBandEnd){
+                        text.text("$ " + Math.round(d.yVar));
+                        updateSizingPrice(d);
                         return "barSelected";
+                    }else{
+                        return "bar";
                     }
                 });
 
-            var barsel = g.selectAll(".barSelected").attr("height");
-            barsel = parseFloat(barsel);
+            var barsel = g.selectAll(".barSelected").attr("y");
+            barsel = parseFloat(barsel) + 40;
+
 
             var barX = g.selectAll(".barSelected").attr("x");
+            barX = 22 + parseFloat(barX);
 
-            toolTip.attr("style", "margin-left: 20px; margin-bottom: 39px; left: " + barX + "px; bottom: " + -(barsel) + "px;");
+            toolTip.attr("style", "margin-left: 0px; margin-bottom: 0px; left: " + barX + "px; bottom: " + -(barsel) + "px;");
 
         };
         var slider = svg.append("g")
@@ -303,7 +407,11 @@ $(document).ready(function () {
             }).on("start drag", dragging)); //https://github.com/d3/d3-drag
 
         var handle = slider.append("g").attr("class", "g-parameter-value handle");
-        var initialXPos = xAxisScale(chartEl.attr("data-value"));
+        var selectedBar = d3.selectAll(".barSelected");
+        var initialXPos = selectedBar.attr("x");
+        var width = selectedBar.attr("width");
+        initialXPos = parseFloat(initialXPos) + (width / 2);
+
         var handlePath = handle.append("path").attr("d", "M-5.5,-2.5v10l6,5.5l6,-5.5v-10z")
             .attr("transform", "translate(" + initialXPos + "," + -6 + ")");
         handle.append("text").style("text-anchor", "middle").attr("y", 20).attr("dy", ".71em");
@@ -320,55 +428,76 @@ $(document).ready(function () {
         text.attr("y", "-6");
 
         var barsel = g.selectAll(".barSelected").attr("height");
-        barsel = parseFloat(barsel) - 50;
-        text.text("$ " + Math.round(middle.xVar));
-
+        barsel =  parseFloat(graphHeight) - parseFloat(barsel) - 5;
+        text.text("$ " + Math.round(middle.yVar));
+        updateSizingPrice(middle);
         var barX = g.selectAll(".barSelected").attr("x");
 
-        console.log(barsel);
-        toolTip.attr("style", "margin-left: 20px; margin-bottom: 39px; left: " + barX + "px; bottom: " + -(barsel) + "px;");
-
-        // var tooltip = svg.append("g")
-        //     .attr("class", "tooltip");
-        // slider.insert("g", ".track-overlay")
-        //     .attr("class", "ticks")
-        //     .attr("transform", "translate(0," + 18 + ")")
-        //     .selectAll("text")
-        //     .data(xAxisScale.ticks(10))
-        //     .enter().append("text")
-        //     .attr("xAxisScale", xAxisScale)
-        //     .attr("text-anchor", "middle");
-        //
-        // tooltip.append("rect")
-        //     .attr("width", 60)
-        //     .attr("height", 20)
-        //     .attr("fill", "white")
-        //     .style("opacity", 0.5);
-        //
-        // tooltip.append("text")
-        //     .attr("x", 30)
-        //     .attr("dy", "1.2em")
-        //     .style("text-anchor", "middle")
-        //     .attr("font-size", "12px")
-        //     .attr("font-weight", "bold");
-
+        toolTip.attr("style", "margin-left: 20px; margin-bottom: 39px; left: " + barX + "px; bottom: " + (-barsel) + "px;");
     }
 
 
     function drawEverything() {
         $(".d3Chart").empty();
         var data = getData();
-        console.log(data);
-        var sliderParamSize = d3old.slider().min(0).max(2).ticks(1).showRange(true).value(1);
-// Render the slider in the div
-        d3old.select('#pricing-param-size').call(sliderParamSize);
+//         var tickFormatter = function (d) {
+//             unhighLightSizingDiv();
+//             if (d == 0) {
+//                 $("#row-1-header-1").css({"background": "#F16195"});
+//                 $("#row-2-header-1").css({"background": "#F16195"});
+//                 return 'Small';
+//             } else if (d == 1) {
+//                 $("#row-1-header-2").css({"background": "#F16195"});
+//                 $("#row-2-header-2").css({"background": "#F16195"});
+//                 return 'Medium';
+//             } else if (d == 2) {
+//                 $("#row-1-header-3").css({"background": "#F16195"});
+//                 $("#row-2-header-3").css({"background": "#F16195"});
+//                 return 'Large';
+//             }
+//         }
+//         console.log(data);
+//         var sliderParamSize = d3old.slider().min(0).max(2).ticks(2).showRange(true).value(1).stepValues([0, 1, 2]).tickFormat(tickFormatter);
+// // Render the slider in the div
+//         d3old.select('#pricing-param-size').call(sliderParamSize);
 
-        var sliderParamOrder = d3old.slider().min(0).max(2).ticks(1).showRange(true).value(2);
-// Render the slider in the div
-        d3old.select('#pricing-param-order').call(sliderParamOrder);
-
+//
+//         var tickFormatterOrder = function (d) {
+//             return " Order no. " + d;
+//         }
+//
+//         var sliderParamOrder = d3old.slider().min(1).max(6).ticks(5).showRange(true).value(2).stepValues([1, 2, 3, 4, 5, 6]).tickFormat(tickFormatterOrder);
+// // Render the slider in the div
+//         d3old.select('#pricing-param-order').call(sliderParamOrder);
+//
         drawChart(".d3Chart", data);
     }
+
+    function unhighLightSizingDiv(){
+        $("#row-1-header-1").css({"background": ""});
+        $("#row-2-header-1").css({"background": ""});
+        $("#row-1-header-2").css({"background": ""});
+        $("#row-2-header-2").css({"background": ""});
+        $("#row-1-header-3").css({"background": ""});
+        $("#row-2-header-3").css({"background": ""});
+    }
+
+    function highLightSizingDiv(div){
+        div.css({"top": ""});
+    }
+
+    function updateSizingPrice(d){
+        var currency = "US $";
+
+
+        $("#row-1-header-1").text(currency+" "+Math.round(d.yVar));
+        $("#row-2-header-1").text(currency+" "+Math.round(d.existingPrice));
+        // $("#row-1-header-2").text(currency+" "+amount * 1 * initial);
+        // $("#row-2-header-2").text(currency+" "+amount * 1 * following);
+        // $("#row-1-header-3").text(currency+" "+amount * large * initial);
+        // $("#row-2-header-3").text(currency+" "+amount * large * following);
+    }
+
 
     drawEverything();
 

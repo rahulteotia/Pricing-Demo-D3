@@ -12,7 +12,7 @@ d3old.slider = function module() {
 
     function slider(selection) {
         selection.each(function() {
-            div = d3old.select(this).classed('d3oldslider', true);
+            div = d3old.select(this).classed('d3slider', true);
             width = parseInt(div.style("width"), 10)-(margin.left
                 + margin.right);
 
@@ -22,7 +22,7 @@ d3old.slider = function module() {
 
             // SVG
             svg = div.append("svg")
-                .attr("class", "d3oldslider-axis")
+                .attr("class", "d3slider-axis")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
@@ -31,14 +31,14 @@ d3old.slider = function module() {
 
             // Range rect
             svg.append("rect")
-                .attr("class", "d3oldslider-rect-range")
+                .attr("class", "d3slider-rect-range")
                 .attr("width", width)
                 .attr("height", rectHeight);
 
             // Range rect
             if (range) {
                 svg.append("rect")
-                    .attr("class", "d3oldslider-rect-value")
+                    .attr("class", "d3slider-rect-value")
                     .attr("width", scale(value))
                     .attr("height", rectHeight);
             }
@@ -181,7 +181,7 @@ d3old.slider = function module() {
             .text(displayValue);
 
         if (range) {
-            svg.selectAll(".d3oldslider-rect-value")
+            svg.selectAll(".d3slider-rect-value")
                 .attr("width", scale(value));
         }
 
